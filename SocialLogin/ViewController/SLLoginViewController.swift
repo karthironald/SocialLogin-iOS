@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TwitterKit
 
 enum SLFacebookPermission: String {
     case PublicProfile = "public_profile"
@@ -20,7 +21,7 @@ class SLLoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSign
     @IBOutlet var facebookLoginButton: FBSDKLoginButton!
     @IBOutlet var linkedInLoginButton: UIButton!
     @IBOutlet weak var googleLoginButton: GIDSignInButton!
-
+    @IBOutlet weak var twitterLoginButton: TWTRLogInButton!
     
     // MARK: View Life Cycle Methods
     
@@ -72,6 +73,18 @@ class SLLoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSign
         }
     }
     
+    @IBAction func twitterLoginButtonPressed(sender: TWTRLogInButton) {
+        Twitter.sharedInstance().logInWithCompletion { (session, error) in
+            if (session != nil) {
+                SLTwitterManager.sharedInstance.fetchUserData((session?.userName)!, userID: (session?.userID)!, completionHandler: { (user, error) in
+                    kAppDelegate.configureUIAppearanceForTwitter()
+                    kAppDelegate.profileAsRootViewController()
+                })
+            } else if error != nil {
+                print("error: \(error!.localizedDescription)")
+            }
+        }
+    }
     
     // MARK: FBSDKLoginButton Delegate Methods
     

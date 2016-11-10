@@ -25,6 +25,7 @@
 		1967CCBD1D6B3B04003327DC /* SLProfileDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1967CCBC1D6B3B04003327DC /* SLProfileDetailsTableViewCell.swift */; };
 		19B206581D6C14EF0053CDEF /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19B206571D6C14EF0053CDEF /* SDWebImage.framework */; };
 		772F6AE51DCAF73D00B44708 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 772F6AE41DCAF73D00B44708 /* GoogleService-Info.plist */; };
+		776A4F691DD4608A003E24AB /* SLTwitterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776A4F681DD4608A003E24AB /* SLTwitterManager.swift */; };
 		7773B4371DCA0638006273CA /* SLGoogleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7773B4361DCA0638006273CA /* SLGoogleManager.swift */; };
 		EC59928B1D6B7A00002406B0 /* SLProfileImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC59928A1D6B7A00002406B0 /* SLProfileImageCell.swift */; };
 		EC59928F1D6B8404002406B0 /* SLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC59928E1D6B8404002406B0 /* SLExtensions.swift */; };
@@ -54,6 +55,7 @@
 		19B206571D6C14EF0053CDEF /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = "../../../../Library/Developer/Xcode/DerivedData/SocialLogin-epvuzypgvcbytuedvqxasjygmoxi/Build/Products/Debug-iphoneos/SDWebImage.framework"; sourceTree = "<group>"; };
 		4A10DEC868617C078ED57763 /* Pods-SocialLogin.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLogin.distribution.xcconfig"; path = "Pods/Target Support Files/Pods-SocialLogin/Pods-SocialLogin.distribution.xcconfig"; sourceTree = "<group>"; };
 		772F6AE41DCAF73D00B44708 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		776A4F681DD4608A003E24AB /* SLTwitterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLTwitterManager.swift; sourceTree = "<group>"; };
 		7773B4361DCA0638006273CA /* SLGoogleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SLGoogleManager.swift; sourceTree = "<group>"; };
 		B23C5A363A1B53690C0716C1 /* Pods-SocialLogin.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLogin.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-SocialLogin/Pods-SocialLogin.adhoc.xcconfig"; sourceTree = "<group>"; };
 		CCFB24A06393F032070821AA /* Pods-SocialLogin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialLogin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SocialLogin/Pods-SocialLogin.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		1967CC8A1D6AFF9B003327DC /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				776A4F681DD4608A003E24AB /* SLTwitterManager.swift */,
 				1967CCA91D6B09CB003327DC /* SocialLogin-Bridging-Header.h */,
 				1967CCB11D6B19A6003327DC /* SLConstant.swift */,
 				1967CCB61D6B2760003327DC /* SLAlertHelper.swift */,
@@ -231,6 +234,7 @@
 				1967CC6B1D6AFEB2003327DC /* Resources */,
 				EE74EECEC0B9883FB954B215 /* [CP] Embed Pods Frameworks */,
 				D84E30B34123206BBE584887 /* [CP] Copy Pods Resources */,
+				776A4F671DD45B16003E24AB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -293,6 +297,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		776A4F671DD45B16003E24AB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 6b85e68ea40c3107d227d3bf9770536a6974d796 c8c23d31051dc0f17beeb0d3694827495957c29c4311c3a8f89847ec4933f2e2";
+		};
 		B57935CF07029E80488F49F1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -347,6 +364,7 @@
 			files = (
 				1967CCB91D6B3135003327DC /* SLFacebookManager.swift in Sources */,
 				EC59928B1D6B7A00002406B0 /* SLProfileImageCell.swift in Sources */,
+				776A4F691DD4608A003E24AB /* SLTwitterManager.swift in Sources */,
 				EC59928F1D6B8404002406B0 /* SLExtensions.swift in Sources */,
 				1967CCBB1D6B3147003327DC /* SLLinkedInManager.swift in Sources */,
 				1967CCB21D6B19A6003327DC /* SLConstant.swift in Sources */,

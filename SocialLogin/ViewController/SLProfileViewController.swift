@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TwitterKit
 
 let kProfileDetailCell = "DetailsCellIdentifier"
 let kFacebookProfileImageCell = "FacebookImageCellIdentifier"
@@ -62,8 +63,11 @@ class SLProfileViewController: UIViewController, UITableViewDataSource, UITableV
                 FBSDKLoginManager().logOut()
             } else if LISDKSessionManager.hasValidSession() {
                 SLLinkedInManager.sharedInstance.logout()
-            } else if kAppDelegate.googleIdToken != nil {
-                 GIDSignIn.sharedInstance().signOut()
+            } else if GIDSignIn.sharedInstance().currentUser != nil {
+                SLGoogleManager.sharedInstance.details = []
+                GIDSignIn.sharedInstance().signOut()
+            } else if Twitter.sharedInstance().sessionStore.session() != nil {
+                SLTwitterManager.sharedInstance.logOut()
             }
             kAppDelegate.configureRootViewController()
         }
@@ -88,7 +92,6 @@ class SLProfileViewController: UIViewController, UITableViewDataSource, UITableV
                 self.reloadProfileData()
             }
         } else if LISDKSessionManager.hasValidSession() {
-            
             SLLinkedInManager.sharedInstance.userDetails({ (status) in
                 self.profileArray = SLLinkedInManager.sharedInstance.details
                 self.reloadProfileData()
@@ -96,8 +99,11 @@ class SLProfileViewController: UIViewController, UITableViewDataSource, UITableV
                     self.reloadProfileData()
                     SLAlertHelper.showAlertWith(kAlertTitleError, message: errorMessage, inController: self)
             })
-        } else if kAppDelegate.googleIdToken != nil {
+        } else if GIDSignIn.sharedInstance().currentUser != nil {
             self.profileArray = SLGoogleManager.sharedInstance.details
+            self.reloadProfileData()
+        } else if Twitter.sharedInstance().sessionStore.session() != nil {
+            self.profileArray = SLTwitterManager.sharedInstance.details
             self.reloadProfileData()
         }
         
@@ -146,7 +152,13 @@ class SLProfileViewController: UIViewController, UITableViewDataSource, UITableV
                 }
                 imageCell.downLoadImage(self.profileArray[indexPath.row].1!)
                 return imageCell
-            } else if kAppDelegate.googleIdToken != nil {
+            } else if GIDSignIn.sharedInstance().currentUser != nil {
+                guard let imageCell = tableView.dequeueReusableCellWithIdentifier(kGoogleProfileImageCell, forIndexPath: indexPath) as? SLProfileImageCell else {
+                    return UITableViewCell()
+                }
+                imageCell.googleProfileImage(self.profileArray[indexPath.row].1!)
+                return imageCell
+            } else if Twitter.sharedInstance().sessionStore.session() != nil {
                 guard let imageCell = tableView.dequeueReusableCellWithIdentifier(kGoogleProfileImageCell, forIndexPath: indexPath) as? SLProfileImageCell else {
                     return UITableViewCell()
                 }

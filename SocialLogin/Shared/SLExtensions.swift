@@ -22,4 +22,8 @@ extension UIColor {
         return UIColor(red: 0.85, green: 0.27, blue: 0.24, alpha: 1.0)
     }
     
+    class func slTwitterThemeColor() -> UIColor {
+        return UIColor(red: 0.16, green: 0.64, blue: 0.94, alpha: 1.0)
+    }
+    
 }

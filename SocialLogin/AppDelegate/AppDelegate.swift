@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import Fabric
+import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
-    var googleIdToken: String?
     var googleImageURL: NSURL?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -20,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         FBSDKLoginButton.classForCoder()
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+        
+        // Twitter login
+        Fabric.with([Twitter.self])
         
         // Google sign in setup
         var configureError: NSError?
@@ -129,13 +133,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         UINavigationBar.appearance().barTintColor = UIColor.slGoogleThemeColor()
     }
     
+    func configureUIAppearanceForTwitter() {
+        UINavigationBar.appearance().tintColor = UIColor.slTwitterThemeColor()
+        UINavigationBar.appearance().barTintColor = UIColor.slTwitterThemeColor()
+    }
     
     // MARK: - Google GIDSignInDelegate methods
     
      func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
         if (error == nil) {
             // Perform any operations on signed in user here.
-            googleIdToken = user.authentication.idToken // Safe to send to the server
             let fullName = user.profile.name
             let email = user.profile.email
             if user.profile.hasImage == true {

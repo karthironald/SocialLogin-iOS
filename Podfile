@@ -4,4 +4,6 @@ use_frameworks!
 target :'SocialLogin' do
 pod 'SDWebImage', '~>3.8'
 pod 'Google/SignIn'
+pod 'Fabric'
+pod 'TwitterKit'
 end
